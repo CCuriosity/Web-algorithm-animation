@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="styles.css">
+  <title>插入排序</title>
+</head>
+<body>
+  <div class="container">
+    <div id="app">
+      <div class="heading">插入排序</div>
+      <input v-model="number" style="font-size: 20px;width: 50px;height: 30px;margin-left: 30px" @keyup.enter="leftIn" />
+      <button class="button" id="input_button" @click="leftIn" style="background: #ef6666c7"> 输入</button>
+
+      <button class="action-button1" id="create_stack" @click="handleRandom">生成随机数组</button>
+      <button class="button" @click="addspeed" style="background: rgb(184 199 226)">+</button>
+      <a style="font-size:20px">动画速度</a>
+      <button class="button" v-on:click="subspeed" style="background: rgb(184 199 226)">-</button>
+      <button class="action-button1" @click="Clear" style="background: rgb(168 216 226)">重置</button>
+      <button class="action-button2" id="create" @click="handleSort">排序</button>
+      <div id="output" class="output"></div>
+    </div>
+    <canvas id="target" width="900" height="320" ></canvas>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.0.0-beta.15/vue.global.js"></script>
+    <!-- 绘图类 -->
+    <script src="./index.js"></script>
+    <!-- 冒泡 -->
+    <script src="./insertion/index.js"></script>
+
+
+
+    <script>
+      const App = Vue.defineComponent({
+      setup() {
+
+      // 下拉列表
+      const selectItems = [
+        { name: '冒泡排序', sortFn: bubbleSort },
+      ]
+
+      // 当前选择的排序
+      const currentSelectSort = Vue.ref('冒泡排序');
+
+      const number=Vue.ref(10);
+
+      // canvas
+      const ctx = new RectPaint();
+
+      const leftIn = () => {
+        if (number.value>300){output(`> ${number.value}>300，添加失败! `)}
+        else if (number.value<0){output(`> ${number.value}<0，添加失败! `)}
+        else{ctx.left_in(number.value);
+        output(`> 添加${number.value} `);}
+      }
+
+      const Clear=()=>{
+        ctx.clearCanvas();
+        output(`> 清空 `)
+      }
+      // 动画速度
+      const speed = Vue.ref(100);
+
+      const addspeed = () => {
+        speed.value-=20;
+        ctx.changespeed(speed.value);
+        output(`> 加速 `)
+      }
+
+      const subspeed = () => {
+        speed.value+=20;
+        ctx.changespeed(speed.value);
+        output(`> 减速 `)
+      }
+
+      // 生成随机数组
+      const handleRandom = () => {
+        ctx.geratorRandomArr();
+        output(`> 生成随机数组 `)
+      }
+
+
+      // 进行排序
+      const handleSort = () => {
+        const idx = selectItems.findIndex(it => it.name === currentSelectSort.value)
+        ctx.sort(selectItems[idx].sortFn, speed.value)
+      }
+
+      return { selectItems, currentSelectSort, number,leftIn,Clear,speed, addspeed,subspeed,handleRandom, handleSort }
+    }
+  });
+
+  Vue.createApp(App).mount('#app')
+
+      let
+              outputBlock = document.getElementById('output'),
+              create= document.getElementById('create'),
+              outputMsgs  = '';
+
+      create.onclick = () => {
+        output(`> 开始排序`);
+
+      };
+
+      const output = msg => {
+        outputMsgs = `<div class="output-item">${msg}</div>` + outputMsgs;
+        outputBlock.innerHTML = outputMsgs;
+        console.log(outputBlock.innerHTML);
+      }
+
+
+    </script>
+  </div>
+</body>
+</html>
