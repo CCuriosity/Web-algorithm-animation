@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>归并排序</title>
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!-- jQuery (Bootstrap's JavaScript plugins) -->
+<script src="js/jquery.min.js"></script>
+<!-- Custom Theme files -->
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- Custom Theme files -->
+<link type="text/css" rel="stylesheet" href="Styles/SyntaxHighlighter.css"></link>
+		<script language="javascript" src="Scripts/shCore.js"></script>
+		<script language="javascript" src="Scripts/shBrushCpp.js"></script>
+		<script language="javascript" src="Scripts/shBrushXml.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content=" HTML, H5" >
+<meta name="description"content="算法 编程 C语言 教育 漫画">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+</head>
+
+<body class="header-top">
+<!---->
+<div class="header">
+	 <div class="container">
+		 <div class="header-top">
+			 <div class="logo">
+				 <a href="index.html"><h1 style="color:#CC99CC;font-size:48px";>Make It Easy</h1><span><h2  style="color:#FFF;font-size:28px;">Education</span></h2></a>
+			 </div>
+			 <div class="hdr-address">
+				 <div class="address1">
+					 <h5> 华东师范大学</h5>
+					 <p>上海，中国</p>
+				 </div>
+				 <div class="call">
+					 <h5>请与我们联系</h5>
+				 </div>
+				 <div class="clearfix"></div>
+			 </div>
+			 <div class="clearfix"> </div>
+			 <!-- search-scripts -->
+			<script src="js/classie.js"></script>
+			<script src="js/uisearch.js"></script>
+				<script>
+					new UISearch( document.getElementById( 'sb-search' ) );
+				</script>
+			<!-- //search-scripts -->
+		 </div>
+		<div class="top-menu">
+			 <span class="menu">菜单</span>
+			 <ul>
+			 <li><a href="home.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>主页</a></li>
+			 <li><a href="about.html"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>关于</a></li>
+			 <li><a href="context.html"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>目录</a></li>
+			 <li><a href="contact.html"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>联系</a></li>
+             </ul>
+		 </div>
+		 <!-- script-for-menu -->
+		 <script>					
+			$("span.menu").click(function(){
+				$(".top-menu ul").slideToggle("slow" , function(){
+						});
+					});
+		 </script>
+		 <!-- script-for-menu -->	
+		 <div class="clearfix"></div>
+	 </div>
+</div>
+<!---->
+<div class="about">
+	 <div class="container">
+		 
+<link rel="shortcut icon" href="icon1.ico" type="image/x-icon"> <h2  style="color: #CC99CC; font-family: '楷体'; font-size: 36px";>算法简介</h2>
+         <br />
+         <br />
+<div class="about-grids">
+			 <div class="col-md-6 about-info">
+				 <h4  style="color:#000;font-family:'楷体';font-size:30px";>归并排序（Merging Sort）</h4>
+                 <br />
+				 <p style="text-indent:2em;color:#000;font-family:'楷体';font-size:18px">归并排序是一种可以处理大量数据排序的算法，因为它不需要占据过多的存储空间。而且它的算法思想是十分简单明了的。将待排序的n个数，分成n个长度为1的有序子序列，把这些子序列两两合并，得到若干长度为2的子序列，再将这些数列两两合并，得到若干长度为4的有序数列，依次合并下去直到合并成长度为n的有序序列，这样我们就得到了想要的排序结果了。</p>
+<p style="text-indent:2em;color:#C3C;font-family:'楷体';font-size:18px">待排序数：9 5 6 3 7 4 1 2，从小到大排序，长度n=8</p>
+<p style="text-indent:2em;color:#000;font-family:'楷体';font-size:18px">第<span style="color:#000;font-family:'楷体';font-size:22px">1</span><span style="color:#000;font-family:'楷体';font-size:18px">步--分成长度为1的子序列，合并成长度为2的子序列：</span>
+        <p style="text-indent:4em;color:#000;font-family:'楷体';font-size:16px">·9和5进行比较，9 > 5交换得到长度为2的有序子序列5 9</p>
+        <p style="text-indent:4em;color:#000;font-family:'楷体';font-size:16px">·6和3进行比较，6 > 3交换得到长度为2的有序子序列3 6</p>
+        <p style="text-indent:4em;color:#000;font-family:'楷体';font-size:16px">·7和4进行比较，7 > 4交换得到长度为2的有序子序列4 7</p>
+        <p style="text-indent:4em;color:#000;font-family:'楷体';font-size:16px">·1和2进行比较，1 < 2<span style="color:#F00;font-family:'楷体';font-size:18px">不</span>交换得到长度为2的有序子序列1 2</p>
+<p style="text-indent:2em;color:#000;font-family:'楷体';font-size:18px">第<span style="color:#000;font-family:'楷体';font-size:22px">2</span><span style="color:#000;font-family:'楷体';font-size:18px">步--将长度为2的子序列继续比较并且合并，得到长度为4的</span><p style="text-indent:5.5em;color:#000;font-family:'楷体';font-size:18px">子序列：</p>
+        <p style="text-indent:4em;color:#000;font-family:'楷体';font-size:16px">·5 9 和3 6，依次比较两组数据，按从小到大排序之后为长度为4</p><p style="text-indent:4.5em;color:#000;font-family:'楷体';font-size:16px">的有序子序列,也就是3 5 6 9</p>
+        <p style="text-indent:4em;color:#000;font-family:'楷体';font-size:16px">·7 4 和1 2，依次比较两组数据，按从小到大排序之后为长度为4</p><p style="text-indent:4.5em;color:#000;font-family:'楷体';font-size:16px">的有序子序列,也就是1 2 4 7</p>
+<p style="text-indent:2em;color:#000;font-family:'楷体';font-size:18px">第<span style="color:#000;font-family:'楷体';font-size:22px">3</span><span style="color:#000;font-family:'楷体';font-size:18px">步--将长度为4的子序列继续比较并且合并，达到长度为8的</span><p style="text-indent:5.5em;color:#000;font-family:'楷体';font-size:18px">子序列：</p>
+        <p style="text-indent:4em;color:#000;font-family:'楷体';font-size:16px">·3 5 6 9和1 2 4 7，依次比较两组有序的数据，排序之后得到</p><p style="text-indent:4.5em;color:#000;font-family:'楷体';font-size:16px">1 2 3 4 5 6 7 9。</p>
+<p style="text-indent:2em;color:#000;font-family:'楷体';font-size:18px">我们已经将所有的数合并成了长度为8的有序序列了。排序结束。</p>
+</p>
+                 
+	  </div>
+			 <div class="col-md-6 abt-code">
+				<!-- <textarea name="code" id="code" class="c++"></textarea>-->
+<pre><code class="language-cpp">
+void merge(a,b,l,m,n)//将两个排好序的数列合成一个排好序的数列并存放到b中
+    int a[],b[];//a为存放要合并的数列数组，b为存放合并后的序列数组
+    int l,m,n;//序列一共有m个数字，序列2共有n个数字
+{
+    int i,j,k;
+    i = 1;//序列1的起始位置
+    j = m+1;//序列2的起始位置
+    k = 1;//数组b的下标
+    while(i <= m && j <= n)//两个序列都没走到尽头
+    {
+        if(a[i] < a[j])
+            b[k++] = a[i++];//将序列1数放入数组b
+        else
+            b[k++] = a[j++];//将序列2数放入数组b
+    }
+    while(i <= m)
+        b[k++] = a[i++];//序列2都被放进排好序的b数组中了，只需要把序列一填进去就好
+    while(j <= n)
+        b[k++] = a[j++];//序列1都被放进排好序的b数组中了，只需要把序列一填进去就好
+}
+
+void mpass(a,b,n,1)//把具有n个结点的序列a所包含的各个有序子序列成对地加以合并
+    int a[],b[];
+    int n,l;
+{
+    int i,j;
+    i=0;
+    while(i+2*l <= n)//剩下的序列至少还有两组可以进行合并
+    {
+        merge(a,b,i,i+l-1,i+2*l-1);//i是第一段开始下标，i+l-1是第一段结束下标，i+2*l-1是第二段结束下标
+        i+=2*l;//i指向下一个对要合并的序列
+    }
+    if(i+l < n)//只剩下一组小序列和另一组长度不到l的小序列
+       merge(a,b,i,i+l-1,n-1);//将两个序列合并
+    else//只剩下一组长度不到l的小序列
+        for (j = 1 ; j < n ; j++)
+    {
+        b[j] = a[j];//将其依次塞到已派好的序列后面
+    }
+}
+
+void merge_sort(a,n)
+    int a[];
+    int n;
+{
+    int b[MAXN];
+    int l;//每次要进行归并的序列长度
+    l = 1;//从l=1开始
+    while(l < n)
+    {
+        mapss(a,b,n,l);//将a以l长度的序列进行两两组合排序，存放到b中
+        l *= 2;//l长度变为原来的2倍
+        mpass(b,a,n,l);//将b以l长度的小序列进行两两组合，存放到a中
+        l *= 2;//l长度变为原来的2倍
+    }
+}
+</code></pre></div>
+			<script language="javascript">
+			document.body.removeChild(document.getElementById("code"));
+	</script>
+
+			 </div>
+			 <div class="clearfix"></div>			 
+		 </div>
+</div>
+<br />
+
+</div>
+</div>
+<br />
+<br />
+
+
+         
+   
+     
+<div class="visualability">
+<div align="center">
+<a href="./sort_visulazition/merge.html" target="_blank" ><h2 style="color:#CC99CC;font-family:'楷体';font-size:36px";>可视化</h2> </a>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+  
+</div>
+</div>
+<br />
+<br /> 
+<!---->
+
+<div class="copywrite">
+	 <div class="container">
+
+	 </div>
+</div>
+
+<!---->
+</body>
+</html>

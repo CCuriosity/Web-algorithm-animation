@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>双路快速排序</title>
+	<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+	<!-- jQuery (Bootstrap's JavaScript plugins) -->
+	<script src="js/jquery.min.js"></script>
+	<!-- Custom Theme files -->
+	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<!-- Custom Theme files -->
+	<link type="text/css" rel="stylesheet" href="Styles/SyntaxHighlighter.css"></link>
+	<script language="javascript" src="Scripts/shCore.js"></script>
+	<script language="javascript" src="Scripts/shBrushCpp.js"></script>
+	<script language="javascript" src="Scripts/shBrushXml.js"></script>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content=" HTML, H5" >
+	<meta name="description"content="算法 编程 C语言 教育 漫画">
+	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+</head>
+
+<body class="header-top">
+<!---->
+<div class="header">
+	<div class="container">
+		<div class="header-top">
+			<div class="logo">
+				<a href="index.html"><h1 style="color:#CC99CC;font-size:48px";>Make It Easy</h1><span><h2  style="color:#FFF;font-size:28px;">Education</span></h2></a>
+			</div>
+			<div class="hdr-address">
+				<div class="address1">
+					<h5> 华东师范大学</h5>
+					<p>上海，中国</p>
+				</div>
+				<div class="call">
+					<h5>请与我们联系</h5>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="clearfix"> </div>
+			<!-- search-scripts -->
+			<script src="js/classie.js"></script>
+			<script src="js/uisearch.js"></script>
+			<script>
+				new UISearch( document.getElementById( 'sb-search' ) );
+			</script>
+			<!-- //search-scripts -->
+		</div>
+		<div class="top-menu">
+			<span class="menu">菜单</span>
+			<ul>
+				<li><a href="home.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>主页</a></li>
+				<li><a href="about.html"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>关于</a></li>
+				<li><a href="context.html"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>目录</a></li>
+				<li><a href="contact.html"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>联系</a></li>
+			</ul>
+		</div>
+		<!-- script-for-menu -->
+		<script>
+			$("span.menu").click(function(){
+				$(".top-menu ul").slideToggle("slow" , function(){
+				});
+			});
+		</script>
+		<!-- script-for-menu -->
+		<div class="clearfix"></div>
+	</div>
+</div>
+<!---->
+<div class="about">
+	<div class="container">
+		<h2  style="color: #CC99CC; font-family: '楷体'; font-size: 36px";>算法简介</h2>
+		<br />
+		<br />
+		<div class="about-grids">
+			<div class="col-md-6 about-info">
+				<h4  style="color:#000;font-family:'楷体';font-size:30px";>双路快速排序</h4>
+				<br />
+				<p style="text-indent:2em;color:#000;font-family:'楷体';font-size:18px">双路快速排序时间和空间复杂度同随机化快速排序。 </p>
+				<br />
+				<p style="text-indent:2em;color:#000;font-family:'楷体';font-size:18px">对于有大量重复元素的数组，如果使用上一节随机化快速排序效率是非常低的，导致 partition 后大于基点或者小于基点数据的子数组长度会极度不平衡，甚至会退化成 O(n*2) 时间复杂度的算法，对这种情况可以使用双路快速排序算法。</p>
+				<br>
+				<p style="text-indent:2em;color:#C3C;font-family:'楷体';font-size:20px">过程图示</p>
+				<br>
+				<img src="images/双路快速排序.png" class="img-responsive" alt=""/>
+				<br>
+			</div>
+
+			<div class="col-md-6 abt-code">
+				<br />
+				<br />
+				<pre>
+					<code class="language-cpp">
+package runoob;
+/**
+ * 双路快速排序
+ */
+public class QuickSort2Ways {
+    //核心代码---开始
+    private static int partition(Comparable[] arr, int l, int r){
+        // 随机在arr[l...r]的范围中, 选择一个数值作为标定点pivot
+        swap( arr, l , (int)(Math.random()*(r-l+1))+l );
+        Comparable v = arr[l];
+        // arr[l+1...i) <= v; arr(j...r] >= v
+        int i = l+1, j = r;
+        while( true ){
+            while( i <= r && arr[i].compareTo(v) < 0 )
+                i ++;
+            while( j >= l+1 && arr[j].compareTo(v) > 0 )
+                j --;
+            if( i > j )
+                break;
+            swap( arr, i, j );
+            i ++;
+            j --;
+        }
+        swap(arr, l, j);
+        return j;
+    }
+    //核心代码---结束
+    // 递归使用快速排序,对arr[l...r]的范围进行排序
+    private static void sort(Comparable[] arr, int l, int r){
+        if (l >= r) {
+            return;
+        }
+        int p = partition(arr, l, r);
+        sort(arr, l, p-1 );
+        sort(arr, p+1, r);
+    }
+    public static void sort(Comparable[] arr){
+        int n = arr.length;
+        sort(arr, 0, n-1);
+    }
+    private static void swap(Object[] arr, int i, int j) {
+        Object t = arr[i];
+        arr[i] = arr[j];
+        arr[j] = t;
+    }
+    // 测试 QuickSort
+    public static void main(String[] args) {
+        // 双路快速排序算法也是一个O(nlogn)复杂度的算法
+        // 可以在1秒之内轻松处理100万数量级的数据
+        // Quick Sort也是一个O(nlogn)复杂度的算法
+        // 可以在1秒之内轻松处理100万数量级的数据
+        int N = 1000000;
+        Integer[] arr = SortTestHelper.generateRandomArray(N, 0, 100000);
+        sort(arr);
+        SortTestHelper.printArray(arr);
+    }
+}
+				</code>
+				</pre>
+				<br />
+
+
+			</div>
+
+			<script language="javascript">
+				<!--
+				dp.SyntaxHighlighter.HighlightAll('code', true,false);
+				document.body.removeChild(document.getElementById("code"));
+				-->
+			</script>
+
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>
+<br />
+<br />
+
+<div class="visualability">
+	<div align="center">
+		<a href="./sort_visulazition/quick2.html" target="_blank" ><h2 style="color:#CC99CC;font-family:'楷体';font-size:36px";>可视化</h2> </a>
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+
+	</div>
+</div>
+<br />
+<br />
+
+<div class="copywrite">
+	<div class="container">
+
+	</div>
+</div>
+
+</body>
+</html>
